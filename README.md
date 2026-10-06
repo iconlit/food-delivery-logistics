@@ -147,7 +147,6 @@ The data shows what weather does to delivery time, not what staffing or radius c
 2. **Give CBD pickups their own plan.** They run about 10 minutes long and make up over a fifth of orders. Dispatch earlier, set longer arrival times, or dedicate riders.
 3. **Adopt a weather rule.** Storm and rain trigger a staffing uplift and a longer arrival-time promise, with radius reductions piloted in storms.
 4. **Review high-signal routes.** Where a route with 14 or more signals has an alternative, test it, after first checking how much of the effect is really CBD.
-5. **Track the right measure.** Report delivery time by traffic level alongside volume, since volume on its own points to the wrong cause.
 
 ---
 
