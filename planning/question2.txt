@@ -1,0 +1,292 @@
+==============================================================================
+FOOD DELIVERY LOGISTICS - BUSINESS QUESTIONS BY STAKEHOLDER
+==============================================================================
+Dataset: Food_Delivery_Time_Prediction.csv
+Scope:   50,000 orders, Jan - Dec 2025
+Note:    Every question below can be answered using the columns in the dataset.
+         Figures in brackets are quick reference values from the data.
+
+Dataset columns used:
+Order_ID, Order_Date, Order_Hour, Day_of_Week, Is_Weekend, Is_Festival,
+Weather, Pickup_Zone, Dropoff_Zone, Vehicle_Type, Rider_Experience_Years,
+Rider_Rating, Restaurant_Rating, Cuisine_Type, Order_Items, Restaurant_Load,
+Preparation_Time_Min, Road_Distance_km, Delivery_Distance_Category,
+Traffic_Level, Number_of_Signals, Average_Speed_kmph, Delivery_Priority,
+Time_taken_min
+
+Overall reference: average delivery time = 84 min; 35% of orders take over
+90 min; 14% take over 120 min.
+
+
+==============================================================================
+1. SHAREHOLDERS / INVESTORS
+==============================================================================
+Main concern: Is the delivery operation reliable, scalable and well run?
+
+Q1.  How many orders do we handle each month, and is volume growing or flat?
+     [Columns: Order_Date, Order_ID]
+Q2.  What share of orders are delivered late (over 90 and over 120 minutes)?
+     [Columns: Time_taken_min]
+Q3.  Is our average delivery time improving or getting worse over the year?
+     [Columns: Order_Date, Time_taken_min]
+Q4.  How much of our delay comes from things we cannot control (weather,
+     traffic) versus things we can control (vehicle choice, rider, zone)?
+     [Columns: Weather, Traffic_Level, Vehicle_Type, Rider_Experience_Years]
+Q5.  Which days and conditions create the biggest operational risk
+     (festivals, storms, severe traffic)?
+     [Columns: Is_Festival, Weather, Traffic_Level, Time_taken_min]
+Q6.  How consistent is our service? How wide is the gap between our fastest
+     and slowest deliveries?
+     [Columns: Time_taken_min]
+
+
+==============================================================================
+2. CEO / TOP MANAGEMENT
+==============================================================================
+Main concern: Are we meeting our delivery promise, and where should we focus?
+
+Q1.  What is our average delivery time, and what delivery time can we
+     realistically promise customers?
+     [Columns: Time_taken_min]
+Q2.  What single factor has the biggest effect on delivery time?
+     [Columns: Road_Distance_km, Average_Speed_kmph, Preparation_Time_Min,
+      Number_of_Signals, Traffic_Level, Weather]
+Q3.  Are we ready for peak periods such as weekends and festivals?
+     Weekends run about 8 min slower; festivals about 12 min slower.
+     [Columns: Is_Weekend, Is_Festival, Time_taken_min]
+Q4.  Which zones and routes perform best and worst?
+     [Columns: Pickup_Zone, Dropoff_Zone, Time_taken_min]
+Q5.  Are our Priority and VIP tiers actually faster than Normal orders?
+     [Columns: Delivery_Priority, Time_taken_min]
+     [VIP 82 min vs Normal 84 min - barely different]
+Q6.  Can we predict delivery time accurately at the moment an order is
+     placed, so customers get a reliable ETA?
+     [Columns: all input columns vs Time_taken_min]
+
+
+==============================================================================
+3. OPERATIONS MANAGER
+==============================================================================
+Main concern: Running each day smoothly and spotting where delays build up.
+
+Q1.  What are our busiest hours by order volume, and does delivery time get
+     worse when volume is high?
+     [Peaks around 12:00-13:00 and 18:00-20:00. Note: the data has no rider
+      count or shifts, so staffing levels cannot be measured. Delivery time
+      is only a rough sign of strain.]
+     [Columns: Order_Hour, Order_ID, Time_taken_min]
+Q2.  Why are 08:00-10:00 and 18:00-21:00 slower (about 87-89 min) than other
+     hours (about 80-81 min)?
+     [Columns: Order_Hour, Traffic_Level, Time_taken_min]
+Q3.  Which days of the week have the highest order volume?
+     [Columns: Day_of_Week, Order_ID]
+Q4.  Which pickup zones slow us down?
+     [CBD pickups average 94 min vs 78-83 min elsewhere]
+     [Columns: Pickup_Zone, Time_taken_min]
+Q5.  Which pickup-to-dropoff zone pairs take longest?
+     [Columns: Pickup_Zone, Dropoff_Zone, Time_taken_min]
+Q6.  How should we change the delivery radius in rain, fog and storms?
+     [Clear 77 min, Rain 99 min, Storm 114 min]
+     [Columns: Weather, Time_taken_min, Road_Distance_km]
+Q7.  How much time do we lose to traffic?
+     [Low 76 min, Moderate 92, High 112, Severe 134]
+     [Columns: Traffic_Level, Time_taken_min]
+Q8.  Do more traffic signals on a route add meaningful delay?
+     [Columns: Number_of_Signals, Time_taken_min]
+Q9.  How many orders are delivered per hour at peak, and how does speed change
+     as volume rises?
+     [Columns: Order_Hour, Order_Date, Time_taken_min]
+
+
+==============================================================================
+4. FLEET MANAGER
+==============================================================================
+Main concern: Having the right vehicles for the right jobs.
+
+Q1.  How does each vehicle type perform on delivery time?
+     [Bike 72 min, Scooter 82, Electric Scooter 89, Bicycle 130]
+     [Columns: Vehicle_Type, Time_taken_min]
+Q2.  What is the average speed of each vehicle type?
+     [Bike 38 kmph, Scooter 31, Electric Scooter 27, Bicycle 14.5]
+     [Columns: Vehicle_Type, Average_Speed_kmph]
+Q3.  Are we sending bicycles on routes that are too long?
+     (All vehicle types average about 26 km, yet bicycles do only 14 kmph.)
+     [Columns: Vehicle_Type, Road_Distance_km]
+Q4.  What is the maximum distance each vehicle type should be assigned?
+     [Columns: Vehicle_Type, Road_Distance_km, Time_taken_min]
+Q5.  Which vehicle works best in each weather condition?
+     [Columns: Vehicle_Type, Weather, Time_taken_min]
+Q6.  Which vehicle works best in each traffic level?
+     [Columns: Vehicle_Type, Traffic_Level, Time_taken_min]
+Q7.  What is our vehicle mix (Bike 46%, Scooter 26%, Electric Scooter 18%,
+     Bicycle 11%), and does it match what the jobs require?
+     [Columns: Vehicle_Type, Road_Distance_km, Pickup_Zone]
+Q8.  How many deliveries does each vehicle type complete during peak hours?
+     [Columns: Vehicle_Type, Order_Hour]
+
+
+==============================================================================
+5. RIDER MANAGER / HR
+==============================================================================
+Main concern: Rider performance, training and workload.
+
+Q1.  Does more experience make riders faster?
+     [Under 1 year: 87 min; 6-10 years: 80 min]
+     [Columns: Rider_Experience_Years, Time_taken_min]
+Q2.  Does rider rating predict delivery speed? (Correlation is very weak.)
+     [Columns: Rider_Rating, Time_taken_min]
+Q3.  After accounting for vehicle and distance, which rider profiles
+     (experience band, rating band) are faster or slower?
+     [Note: there is no rider ID, so individual riders cannot be ranked.]
+     [Columns: Rider_Experience_Years, Rider_Rating, Vehicle_Type,
+      Road_Distance_km, Time_taken_min]
+Q4.  Do new riders (under 1 year) struggle more in bad weather or heavy
+     traffic?
+     [Columns: Rider_Experience_Years, Weather, Traffic_Level, Time_taken_min]
+Q5.  Which assignments should go to experienced riders (long distance, storms,
+     CBD pickups, festivals)?
+     [Columns: Rider_Experience_Years, Road_Distance_km, Weather,
+      Pickup_Zone, Is_Festival]
+Q6.  Do experienced riders actually get assigned the harder deliveries?
+     [Columns: Rider_Experience_Years, Road_Distance_km, Traffic_Level]
+Q7.  Are riders on bigger orders (more items) slower?
+     [Columns: Order_Items, Time_taken_min]
+
+
+==============================================================================
+6. RESTAURANT PARTNERSHIPS / SUPPLY MANAGER
+==============================================================================
+Main concern: How restaurant behaviour affects delivery time.
+
+Q1.  How long does preparation take on average, and how much of total delivery
+     time is waiting for food?
+     [Average prep 24 min; range 5-51 min]
+     [Columns: Preparation_Time_Min, Time_taken_min]
+Q2.  Which cuisines are slowest and fastest?
+     [Biryani 93 min, North Indian 90, Pizza 87, Chinese 85 - vs Burger 74,
+      Cafe 74, Bakery 74]
+     [Columns: Cuisine_Type, Time_taken_min]
+Q3.  Which cuisines have the longest preparation times?
+     [Columns: Cuisine_Type, Preparation_Time_Min]
+Q4.  Does restaurant load (Low / Medium / High) increase preparation time and
+     delivery time?
+     [High load adds only about 4 min]
+     [Columns: Restaurant_Load, Preparation_Time_Min, Time_taken_min]
+Q5.  Does a higher restaurant rating mean faster preparation or delivery?
+     [Columns: Restaurant_Rating, Preparation_Time_Min, Time_taken_min]
+Q6.  Do larger orders (more items) take longer to prepare?
+     [Columns: Order_Items, Preparation_Time_Min]
+Q7.  Which pickup zones have the most slow-preparing restaurants?
+     [Columns: Pickup_Zone, Preparation_Time_Min, Restaurant_Load]
+Q8.  At what hours is restaurant load highest, and do delivery times rise
+     at those hours?
+     [Columns: Order_Hour, Restaurant_Load]
+
+
+==============================================================================
+7. PRICING / SERVICE-TIER MANAGER
+==============================================================================
+Main concern: Whether service tiers and distance bands reflect real service.
+
+Q1.  Are Priority and VIP orders delivered faster than Normal orders?
+     [Normal 84 min, Priority 83, VIP 82]
+     [Columns: Delivery_Priority, Time_taken_min]
+Q2.  Are Priority and VIP orders given better vehicles or more experienced
+     riders?
+     [Columns: Delivery_Priority, Vehicle_Type, Rider_Experience_Years]
+Q3.  What share of orders is Normal (74%), Priority (20%) and VIP (6%)?
+     Does this change by hour, zone or festival?
+     [Columns: Delivery_Priority, Order_Hour, Pickup_Zone, Is_Festival]
+Q4.  Is our distance category useful? 94% of orders fall into "Long".
+     Should we redefine the bands (e.g. 0-10, 10-20, 20-30, 30+ km)?
+     [Columns: Delivery_Distance_Category, Road_Distance_km]
+Q5.  How does delivery time rise with distance, and where does it climb
+     sharply?
+     [Short 34 min, Medium 40 min, Long 87 min]
+     [Columns: Road_Distance_km, Time_taken_min]
+Q6.  When should we apply surcharges or restrictions based on conditions
+     (storm, severe traffic, festival, long distance)?
+     [Columns: Weather, Traffic_Level, Is_Festival, Road_Distance_km]
+
+
+==============================================================================
+8. CUSTOMER EXPERIENCE / SERVICE MANAGER
+==============================================================================
+Main concern: Keeping delivery times predictable and reducing very long waits.
+
+Q1.  What percentage of orders arrive in under 30, 60, 90 and over 120
+     minutes?
+     [Columns: Time_taken_min]
+Q2.  Which conditions most often produce deliveries of over 120 minutes?
+     [Columns: Time_taken_min, Weather, Traffic_Level, Vehicle_Type,
+      Road_Distance_km]
+Q3.  What ETA should we show customers for different distances, weather and
+     traffic conditions?
+     [Columns: Road_Distance_km, Weather, Traffic_Level, Time_taken_min]
+Q4.  On which days and hours are customers most likely to experience delays?
+     [Columns: Day_of_Week, Order_Hour, Time_taken_min]
+Q5.  Which dropoff zones receive the slowest deliveries?
+     (Dropoff zones are all about 84 min, so delay is driven by pickup and
+      route rather than destination.)
+     [Columns: Dropoff_Zone, Time_taken_min]
+Q6.  Are festival days (95 min vs 83 min) different enough to need a separate
+     delivery promise?
+     [Columns: Is_Festival, Time_taken_min]
+
+
+==============================================================================
+9. DATA / ANALYTICS LEAD
+==============================================================================
+Main concern: What drives delivery time, and how well can we predict it?
+
+Q1.  Which variables are most strongly related to delivery time?
+     [Distance 0.70, Average speed -0.60, Preparation time 0.23,
+      Signals 0.13, Order items 0.08]
+     [Columns: all numeric columns]
+Q2.  How accurately can we predict Time_taken_min using the other columns?
+     [Columns: all input columns]
+Q3.  Which features matter most in the prediction model?
+     [Columns: all input columns]
+Q4.  Are there outliers (unusually short or long deliveries) that need
+     checking? (Range is 10-180 min.)
+     [Columns: Time_taken_min, Road_Distance_km, Average_Speed_kmph]
+Q5.  Is the data consistent? For example, do very short distances sometimes
+     show long delivery times, or do speeds look unrealistic for the vehicle?
+     [Columns: Road_Distance_km, Average_Speed_kmph, Time_taken_min,
+      Vehicle_Type]
+Q6.  Are there seasonal or monthly patterns?
+     [Columns: Order_Date, Time_taken_min]
+Q7.  Which combinations of conditions give the worst delivery times (for
+     example storm + severe traffic + bicycle + long distance)?
+     [Columns: Weather, Traffic_Level, Vehicle_Type, Road_Distance_km]
+
+
+==============================================================================
+QUICK GUIDE: WHO CARES ABOUT WHAT
+==============================================================================
+Topic                           Who is most interested
+------------------------------  --------------------------------------------
+Overall delivery time / lateness  Shareholders, CEO, Customer Experience
+Order volume and growth           Shareholders, CEO, Operations
+Peak hours and order volume       Operations, Rider Manager
+Vehicle performance               Fleet Manager, Operations, CEO
+Rider experience and rating       Rider Manager, Operations
+Weather and traffic impact        Operations, Fleet, CEO, Customer Experience
+Zones and routes                  Operations, CEO, Restaurant Partnerships
+Cuisine and preparation time      Restaurant Partnerships, Operations
+Priority / VIP tiers              Pricing Manager, CEO, Customer Experience
+Distance bands and ETA            Pricing, Customer Experience, Data Lead
+Prediction and drivers            Data Lead, CEO
+
+
+==============================================================================
+SUGGESTED FIRST ANALYSES (highest business impact)
+==============================================================================
+1. Vehicle vs distance: bicycles take 130 min on routes bikes finish in 72.
+2. Priority / VIP tiers show almost no speed advantage over Normal orders.
+3. Weather and traffic: storms add about 37 min and severe traffic about
+   58 min versus the best conditions.
+4. Peak-hour slowdowns at 08:00-10:00 and 18:00-21:00.
+5. CBD pickups are roughly 11-16 min slower than other zones.
+6. Slow cuisines (Biryani, North Indian) driven by preparation time.
+==============================================================================

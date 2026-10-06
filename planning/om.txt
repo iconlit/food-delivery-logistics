@@ -1,0 +1,88 @@
+3. OPERATIONS MANAGER
+==============================================================================
+Main concern: Running each day smoothly, with the right riders in the right
+              place at the right time.
+
+Q1.  What are our busiest hours, and are we staffed to match them?
+     [Columns: Order_Hour, Order_ID]
+Q2.  Why are 08:00-10:00 and 18:00-21:00 slower (about 87-89 min) than other
+     [Columns: Order_Hour, Traffic_Level, Time_taken_min]
+Q3.  Which busiest days of the week need the most riders?
+     [Columns: Day_of_Week, Order_ID]
+Q4.  Which pickup zones slow us down?
+     [Columns: Pickup_Zone, Time_taken_min]
+Q5.  Which pickup-to-dropoff zone pairs take longest?
+     [Columns: Pickup_Zone, Dropoff_Zone, Time_taken_min]
+Q6.  How should we change staffing or delivery radius in rain, fog and storms?
+     [Columns: Weather, Time_taken_min, Road_Distance_km]
+Q7.  How much time do we lose to traffic?
+     [Columns: Traffic_Level, Time_taken_min]
+Q8.  Do more traffic signals on a route add meaningful delay?
+     [Columns: Number_of_Signals, Time_taken_min]
+Q9.  How many orders are delivered per hour at peak, and how does speed change
+     as volume rises?
+     [Columns: Order_Hour, Order_Date, Time_taken_min]
+
+
+==============================================================================
+
+
+==============================================================================
+Q1 - order_hour and order id 
+- count how many orders come in each hour 
+
+Q2 - order_hour , traffic_level , weather , time_taken 
+-investigating why some during some hours order take more time to arrive 
+- checked avg,best,worse time 
+
+insights - the worst avg time between 18-20 thats also when we have more order coming in also worst avg hours fall between 8-10 but those are our peak hours
+
+insights 2 - the hours that have a bad avg time also have their traffic lvl above 1 
+
+Q3.  
+- Which busiest days of the week need the most riders?
+- count how many orders occur each day 
+
+Q4.  Which pickup zones slow us down?
+- pick up zone that slows us down 
+
+insights- cbd has the 2nd highest order count but the avg time taken when the zone is cbd is 93.84 that is like 10min more than the 2nd highest that is 83.27
+
+Q5.  Which pickup-to-dropoff zone pairs take longest?
+insights - any pickup-dropoff zone with cbd has its pick up zone had an avg delivery time above 90 the best perfoming pick up drop off zone has its pickup zone as industrial
+
+Q6.  
+How should we change staffing or delivery radius in rain, fog and storms?
+
+Q7.  
+How much time do we lose to traffic?
+
+Q8.  
+Do more traffic signals on a route add meaningful delay?
+
+Q9.  
+How many orders are delivered per hour at peak, and how does speed change
+
+==============================================================================
+
+
+🟢 Operations / Demand
+Q1: Orders by hour
+Q3: Busiest days → rider demand
+Q9: Orders per hour at peak + speed change
+
+Common: When and how much demand are we dealing with?
+
+🔴 Delivery Time / Performance
+Q2: Why do some hours take longer?
+Q4: Which pickup zones slow us down?
+Q5: Which pickup → dropoff pairs take longest?
+Q7: How much time do we lose to traffic?
+
+Common: What causes delivery delays?
+
+🔵 External / Route Factors
+Q2: Traffic + weather + time
+Q6: Rain, fog, storms
+Q7: Traffic
+Q8: Traffic signals
