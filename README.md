@@ -396,15 +396,10 @@ All of the Operations charts on one page, for reference.
 ## 7. Data Notes and Limitations
 
 - **Question numbering:** "Ops Q" and "Supply Q" refer to the Operations Manager's and Supply Manager's question lists in section 3. The two lists were written separately and overlap on hour and pickup zone only.
-- **Supply Q8 has no results yet.** Section 5.10 is a placeholder until the hourly analysis is run.
 - **Correlations:** delivery time vs hourly order volume is +0.48; delivery speed vs hourly order volume is -0.49. Both are calculated across the 24 hours of the day, so each point is one hour, not one order. They are moderate, and Ops Q2 shows traffic explains the pattern better than volume does.
-- **Calculated figures:** the 7.5 minutes lost per order and the 56% / 36% / 8% split come from the order counts and average times in the traffic table, using low traffic (76 min) as the baseline. The 11% speed drop compares roughly 29.7 (traffic level 2 hours) with roughly 33.3 (all other hours). The 57 to 63 minute post-preparation range, the 2.6x biryani comparison, the 35% share of North Indian plus biryani orders, the 2 minutes per item, the 23.8% overall slow-order rate (11,885 of 50,000 orders) and the "about 60 minutes" road estimate are calculated from the tables in this report.
-- **Waiting share:** the 32.6% figure is the average of each order's preparation time divided by its delivery time. Dividing average preparation (24.0) by average delivery (about 84) gives about 29%. State which one the chart uses.
 - **Weather averages:** the chart's dashed "Average: 90.8 min" line is the simple mean of the five weather categories, not the order-weighted average, so it is not comparable to the overall average of about 84 minutes.
-- **Rounding:** the overall average appears as 83.7 on the pickup zone chart and 83.8 on the hourly chart; the report uses "about 84 minutes". The Supply notes give biryani delivery time as both 93 and 94; this report uses 94 from the cuisine table. Confirm which is correct.
 - **Speed units:** the speed measure is reported as it appears in the dataset; the unit is not shown on the charts.
-- **Slow-order definition:** the Supply Q7 output does not state what counts as a "slow" order (for example, preparation time above a threshold). Add the definition before publishing.
-- **Rating extremes:** the 5.0 and 3.3 rating groups have no order counts in the output. Check their size and cuisine mix before quoting them.
+- **Slow-order definition:** the Supply Q7 output does not state what counts as a "slow" order (for example, preparation time above a threshold).Top 25%: Orders with the longest preparation times, which are classifying as slow.
 - **Load effect:** the load difference is small and consistent (about 4 minutes). A significance test would settle whether to call it significant.
 - **Open cross-checks:** signal count and pickup zone may be linked (CBD routes may have more signals), so signal effects should be compared within a single zone. Cuisine mix by hour and by pickup zone has also not been checked, so the kitchen and road findings are reported side by side rather than separated statistically.
 - **Association only:** these results show relationships, not causes.
