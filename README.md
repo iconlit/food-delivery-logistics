@@ -399,7 +399,7 @@ All of the Operations charts on one page, for reference.
 - **Correlations:** delivery time vs hourly order volume is +0.48; delivery speed vs hourly order volume is -0.49. Both are calculated across the 24 hours of the day, so each point is one hour, not one order. They are moderate, and Ops Q2 shows traffic explains the pattern better than volume does.
 - **Weather averages:** the chart's dashed "Average: 90.8 min" line is the simple mean of the five weather categories, not the order-weighted average, so it is not comparable to the overall average of about 84 minutes.
 - **Speed units:** the speed measure is reported as it appears in the dataset; the unit is not shown on the charts.
-- **Slow-order definition:** the Supply Q7 output does not state what counts as a "slow" order (for example, preparation time above a threshold).Top 25%: Orders with the longest preparation times, which are classifying as slow.
+- **Slow-order definition:** the Supply Q7 output does not state what counts as a "slow" order (for example, preparation time above a threshold).Top 25%: Orders with the longest preparation times, which are classified as slow.
 - **Load effect:** the load difference is small and consistent (about 4 minutes). A significance test would settle whether to call it significant.
 - **Open cross-checks:** signal count and pickup zone may be linked (CBD routes may have more signals), so signal effects should be compared within a single zone. Cuisine mix by hour and by pickup zone has also not been checked, so the kitchen and road findings are reported side by side rather than separated statistically.
 - **Association only:** these results show relationships, not causes.
