@@ -29,39 +29,208 @@ Q9.  How many orders are delivered per hour at peak, and how does speed change
 
 ==============================================================================
 Q1 - order_hour and order id 
-- count how many orders come in each hour 
+- What are our busiest hours by order volume, and does delivery time get
+     worse when volume is high?
 
-Q2 - order_hour , traffic_level , weather , time_taken 
--investigating why some during some hours order take more time to arrive 
-- checked avg,best,worse time 
+  insights - our busiest hours by order volume are 18:00-20:00 and 12:00-13:00 and  yes higher order volumes are generally associated with longer delivery times. The moderate positive correlation (+0.48) indicates that delivery time tends to increase as order volume rises, suggesting that periods of high demand may place additional pressure on delivery operations. 
+
+ order_hour	count	avg_del_time
+0	0	463	83.12
+1	1	471	80.99
+2	2	463	79.34
+3	3	507	80.74
+4	4	490	80.24
+5	5	956	80.47
+6	6	1985	80.77
+7	7	2471	81.50
+8	8	2476	87.70
+9	9	1982	87.20
+10	10	1931	89.32
+11	11	2408	80.77
+12	12	3429	80.75
+13	13	3905	81.12
+14	14	2328	80.20
+15	15	1998	81.65
+16	16	1943	81.14
+17	17	2463	81.30
+18	18	3826	88.21
+19	19	4773	87.83
+20	20	3825	87.08
+21	21	2394	86.83
+22	22	1486	80.82
+23	23	1027	82.88
+
+
+Q2 - 
+-investigating why during some hours order take more time to arrive 
+
+insights - avg delivery between 8:00 - 10:00am and 18:00 - 21:00 are significantly worse than other regions but this is beacuse traffic lvls between this time period are worse than other periods so traffic level during this timeframes are worse off comapred to the others 
+
+note - order volume between 8:00 - 10:00am is signifiantly lower compared to the 18:00 - 20:00 but its avg delivery time is high 
+12:00 - 13:00 has high order volume but avg delivery time from 11:00 - 17:00 is low 
+
 
 insights - the worst avg time between 18-20 thats also when we have more order coming in also worst avg hours fall between 8-10 but those are our peak hours
 
 insights 2 - the hours that have a bad avg time also have their traffic lvl above 1 
 
+
+order_hour	count	best_time	worse_time	avg_time	traffic_lvl
+0	0	463	16	180	83.0	1.0
+1	1	471	19	180	81.0	1.0
+2	2	463	16	180	79.0	1.0
+3	3	507	25	180	81.0	1.0
+4	4	490	19	180	80.0	1.0
+5	5	956	18	180	80.0	1.0
+6	6	1985	14	180	81.0	1.0
+7	7	2471	14	180	81.0	1.0
+8	8	2476	17	180	88.0	2.0
+9	9	1982	13	180	87.0	2.0
+10	10	1931	21	180	89.0	2.0
+11	11	2408	12	180	81.0	1.0
+12	12	3429	14	180	81.0	1.0
+13	13	3905	12	180	81.0	1.0
+14	14	2328	15	180	80.0	1.0
+15	15	1998	15	180	82.0	1.0
+16	16	1943	10	180	81.0	1.0
+17	17	2463	13	180	81.0	1.0
+18	18	3826	12	180	88.0	2.0
+19	19	4773	13	180	88.0	2.0
+20	20	3825	14	180	87.0	2.0
+21	21	2394	15	180	87.0	2.0
+22	22	1486	17	180	81.0	1.0
+23	23	1027	16	180	83.0	1.0
+
+
+
 Q3.  
-- Which busiest days of the week need the most riders?
-- count how many orders occur each day 
+-  Which days of the week have the highest order volume
+ insights - tuesday has the highest order volume but actually theres no significant difference between volume of orders each day with a range of just 286 barely any difference
+
+day_of_week	count
+1	monday	7160
+5	tuesday	7264
+6	wednesday	7197
+4	thursday	7149
+0	friday	7050
+2	saturday	6978
+3	sunday	7202
+
 
 Q4.  Which pickup zones slow us down?
-- pick up zone that slows us down 
+- CBD is the pick up zone that actually slows us down with an avg delivery time of 93.8min that is 10min and only zone greater than our avg delivery time it also bares the zone with the most traffic and 2nd highes volume of orders 
+note - suburban and commercial have very close to avg delivery time but commercial has more order volume that is 9523 to suburban 6461 and residential has the highest volume of order but perform well when it comes to avg delivery time
 
 insights- cbd has the 2nd highest order count but the avg time taken when the zone is cbd is 93.84 that is like 10min more than the 2nd highest that is 83.27
 
+pickup_zone	count	order_time_taken	traffic_lvl
+0	cbd	10997	93.84	2.0
+4	suburban	6461	83.27	1.0
+1	commercial	9523	83.26	1.0
+3	residential	15786	80.27	1.0
+2	industrial	7233	77.91	1.0
+
 Q5.  Which pickup-to-dropoff zone pairs take longest?
-insights - any pickup-dropoff zone with cbd has its pick up zone had an avg delivery time above 90 the best perfoming pick up drop off zone has its pickup zone as industrial
+insights - any pickup-dropoff zone with cbd hs its pick up zone had an avg delivery time above 90 the best perfoming pick up drop off zone has its pickup zone as industrial
+
+	pickup_zone	dropoff_zone	count	avg_time
+4	cbd	suburban	1656	94.45
+1	cbd	commercial	2337	93.87
+3	cbd	residential	3587	93.70
+2	cbd	industrial	1447	93.69
+0	cbd	cbd	1970	93.62
+7	commercial	industrial	1286	84.80
+23	suburban	residential	2063	84.14
+6	commercial	commercial	2044	83.65
+24	suburban	suburban	906	83.30
+22	suburban	industrial	840	83.25
+20	suburban	cbd	1198	83.06
+8	commercial	residential	3086	83.03
+5	commercial	cbd	1723	82.90
+9	commercial	suburban	1384	82.25
+21	suburban	commercial	1454	82.21
+19	residential	suburban	2371	81.54
+15	residential	cbd	2851	81.19
+18	residential	residential	5033	80.04
+17	residential	industrial	2106	79.47
+16	residential	commercial	3425	79.43
+12	industrial	industrial	953	78.57
+14	industrial	suburban	1112	78.47
+11	industrial	commercial	1538	78.38
+13	industrial	residential	2337	77.49
+10	industrial	cbd	1293	77.15
+
 
 Q6.  
 How should we change staffing or delivery radius in rain, fog and storms?
+weather	count	max_time	min_time	avg_time	distance_km
+4	storm	2437	180	24	114.45	26.62
+3	rain	9073	180	17	98.86	26.19
+2	fog	3413	180	12	84.15	26.13
+1	cloudy	11085	180	12	79.02	26.28
+0	clear	23992	180	10	77.30	26.13
+
 
 Q7.  
 How much time do we lose to traffic?
+traffic_level	count	time_taken
+3	severe	524	134.0
+0	high	3744	112.0
+2	moderate	13165	92.0
+1	low	32567	76.0
 
 Q8.  
 Do more traffic signals on a route add meaningful delay?
+number_of_signals	count	time_taken
+16	18	2192	94.68
+15	17	2190	94.45
+14	16	2254	94.35
+13	15	2153	92.45
+12	14	4145	88.78
+0	2	1260	84.21
+11	13	1903	83.96
+9	11	1924	83.23
+1	3	1298	83.18
+10	12	1861	83.12
+8	10	5095	81.34
+7	9	3206	80.59
+4	6	5902	80.41
+3	5	2696	80.33
+2	4	2701	80.01
+5	7	4538	79.28
+6	8	4682	79.21
+
+
 
 Q9.  
 How many orders are delivered per hour at peak, and how does speed change
+order_hour	volume	del_avg_time	avg_traffic_lvl	avg_speed
+10	10	1931	83.0	2.0	29.51
+18	18	3826	82.0	2.0	29.73
+8	8	2476	81.0	2.0	29.66
+9	9	1982	81.0	2.0	29.59
+20	20	3825	81.0	2.0	29.65
+19	19	4773	81.0	2.0	29.83
+21	21	2394	80.0	2.0	29.66
+1	1	471	77.0	1.0	33.81
+23	23	1027	77.0	1.0	32.81
+11	11	2408	76.0	1.0	33.34
+0	0	463	76.0	1.0	32.06
+16	16	1943	76.0	1.0	33.47
+5	5	956	76.0	1.0	33.57
+6	6	1985	76.0	1.0	33.42
+7	7	2471	76.0	1.0	33.26
+4	4	490	75.0	1.0	34.01
+17	17	2463	75.0	1.0	33.16
+15	15	1998	75.0	1.0	33.47
+13	13	3905	75.0	1.0	33.04
+12	12	3429	75.0	1.0	33.35
+22	22	1486	75.0	1.0	33.24
+3	3	507	74.0	1.0	33.47
+2	2	463	74.0	1.0	33.30
+14	14	2328	74.0	1.0	33.34
+
+
 
 ==============================================================================
 
